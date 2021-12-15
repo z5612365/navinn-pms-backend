@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+    <!--
+    <import resource="classpath*:employee-tw-lib-config.xml" />
+
+
+
+    <bean name="componentReg" class="java.lang.String">
+        <constructor-arg value="Controller"/>
+    </bean>
+
+    <bean id="gyl" class="persistent.model.beanr" p:id="9527">
+        <property name="name" ref="#{containsObject('componentReg2')?'componentReg2':'componentReg'}">
+        </property>
+    </bean>
+
+    <bean id="order001" class="persistent.model.beanerPo">
+        <property name="customer" ref="gyl"></property>
+        <property name="userName" value="#{gyl.name}"></property>
+        <property name="orderName" value='#{"Apples".toUpperCase()}'></property>
+    </bean>
+
+
+
+
+-->
+
+    <bean name="orderBo" class="persistent.model.bo.OrderBo">
+    </bean>
+
+    <bean name="a01Service" class="service.impl.A01ServiceImpl">
+        <property name="a01DataAccessor" ref="a01DataAccessor"/>
+    </bean>
+    <bean name="a01DataAccessor" class="persistent.dao.impl.A01DataAccessorImpl">
+
+        <!--
+        <property name="jdbcCallTemplateFactory" ref="jdbcCallTemplateFactory"/>
+-->
+
+    </bean>
+
+    <bean id="order001" class="persistent.model.bean.OrderPo">
+        <property name="customer" ref="userTT"></property>
+        <property name="userName" value="#{userTT.name}"></property>
+        <property name="orderName" value='888'></property>
+    </bean>
+    <bean id="userTT" class="persistent.model.bean.UserPo" p:id="9527">
+        <property name="name" value="111"></property>
+    </bean>
+
+
+</beans>
