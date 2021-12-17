@@ -1,9 +1,8 @@
-
-package persistent.model.bo;
+package persistent.model.bean;
 
 import java.math.BigDecimal;
 
-public class PaymentBo {
+public class PaymentPo {
 
     private String paymentKey;
     private String receiveWallet;

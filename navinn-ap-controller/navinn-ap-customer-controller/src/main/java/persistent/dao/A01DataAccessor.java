@@ -2,6 +2,7 @@ package persistent.dao;
 
 import persistent.model.bean.OrderPo;
 import persistent.model.bean.PaymentDo;
+import persistent.model.bean.PaymentPo;
 import persistent.model.bean.RoomPo;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface A01DataAccessor {
 
     public List<String> getBookedDate(String roomSeq);
 
-    public List<PaymentDo> getPaymentHistory();
+    public List<PaymentPo> getPaymentHistory();
 }

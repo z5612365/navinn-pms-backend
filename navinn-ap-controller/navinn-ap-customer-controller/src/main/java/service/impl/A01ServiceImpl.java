@@ -3,6 +3,7 @@ package service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import persistent.dao.A01DataAccessor;
 import persistent.model.bean.PaymentDo;
+import persistent.model.bean.PaymentPo;
 import persistent.model.bean.RoomPo;
 import persistent.model.bo.OrderBo;
 import persistent.model.bean.OrderPo;
@@ -105,13 +106,13 @@ public class A01ServiceImpl implements A01Service {
     @Override
     public List<PaymentBo> getPaymentHistory() {
 
-        List<PaymentDo> paymentDoList = a01DataAccessor.getPaymentHistory();
+        List<PaymentPo> paymentDoList = a01DataAccessor.getPaymentHistory();
         List<PaymentBo> paymentBoList = new ArrayList<>();
-        for (PaymentDo paymentDo : paymentDoList) {
+        for (PaymentPo paymentPo : paymentDoList) {
             PaymentBo obj = new PaymentBo();
-            obj.setPaymentKey(paymentDo.getPaymentKey());
-            obj.setTotalAmount(paymentDo.getTotalAmount());
-            obj.setStatus(paymentDo.getStatus());
+            obj.setPaymentKey(paymentPo.getPaymentKey());
+            obj.setTotalAmount(paymentPo.getTotalAmount());
+            obj.setStatus(paymentPo.getStatus());
 
             paymentBoList.add(obj);
         }
