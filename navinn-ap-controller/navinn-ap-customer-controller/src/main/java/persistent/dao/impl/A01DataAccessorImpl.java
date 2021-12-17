@@ -5,6 +5,8 @@ import persistent.dao.A01DataAccessor;
 import persistent.model.bean.OrderPo;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import persistent.model.bean.PaymentDo;
+import persistent.model.bean.PaymentPo;
 import persistent.model.bean.RoomPo;
 import persistent.model.mapper.RoomPoRowMapper;
 
@@ -84,6 +86,36 @@ public class A01DataAccessorImpl implements A01DataAccessor {
         }
 
         return paymentKey;
+    }
+
+    @Override
+    public List<String> getBookedDate(String roomSeq) {
+        String sql = "SELECT TB.BOOK_DATE FROM TB_PAYMENT AS TP JOIN TB_BOOKING AS TB ON TP.PAYMENT_KEY=TB.PAYMENT_KEY WHERE TP.STATUS<>\"CANCEL\" AND TB.ROOM_SEQ=" + roomSeq + ";";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+        System.out.println("rows " + rows);
+
+        List<String> bookedDateList = new ArrayList<>();
+        for (Map row : rows) {
+            bookedDateList.add((String) row.get("BOOK_DATE"));
+        }
+        return bookedDateList;
+    }
+
+    @Override
+    public List<PaymentPo> getPaymentHistory() {
+        String sql = "SELECT TP.PAYMENT_KEY, TP.TOTAL_AMOUNT, TP.STATUS FROM TB_PAYMENT AS TP;";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+        System.out.println("rows " + rows);
+
+        List<PaymentPo> roomPoList = new ArrayList<>();
+        for (Map row : rows) {
+            PaymentPo obj = new PaymentPo();
+            obj.setPaymentKey(((String) row.get("PAYMENT_KEY")));
+            obj.setTotalAmount((BigDecimal) row.get("TOTAL_AMOUNT"));
+            obj.setStatus(((String) row.get("STATUS")));
+            roomPoList.add(obj);
+        }
+        return roomPoList;
     }
 
 }

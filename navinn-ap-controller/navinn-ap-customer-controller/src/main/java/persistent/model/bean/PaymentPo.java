@@ -4,19 +4,11 @@ import java.math.BigDecimal;
 
 public class PaymentPo {
 
-    private String roomSeq;
     private String paymentKey;
-    private String roomName;
+    private String receiveWallet;
+    private String refundWallet;
     private BigDecimal totalAmount;
     private String status;
-
-    public String getRoomSeq() {
-        return roomSeq;
-    }
-
-    public void setRoomSeq(String roomSeq) {
-        this.roomSeq = roomSeq;
-    }
 
     public String getPaymentKey() {
         return paymentKey;
@@ -26,12 +18,20 @@ public class PaymentPo {
         this.paymentKey = paymentKey;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public String getReceiveWallet() {
+        return receiveWallet;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setReceiveWallet(String receiveWallet) {
+        this.receiveWallet = receiveWallet;
+    }
+
+    public String getRefundWallet() {
+        return refundWallet;
+    }
+
+    public void setRefundWallet(String refundWallet) {
+        this.refundWallet = refundWallet;
     }
 
     public BigDecimal getTotalAmount() {
