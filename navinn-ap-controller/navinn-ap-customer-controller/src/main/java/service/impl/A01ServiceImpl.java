@@ -2,12 +2,15 @@ package service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import persistent.dao.A01DataAccessor;
+import persistent.model.bean.PaymentDo;
 import persistent.model.bean.RoomPo;
 import persistent.model.bo.OrderBo;
 import persistent.model.bean.OrderPo;
+import persistent.model.bo.PaymentBo;
 import persistent.model.bo.RoomBo;
 import service.A01Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -87,5 +90,31 @@ public class A01ServiceImpl implements A01Service {
         String paymentKey = a01DataAccessor.booking(roomSeq, bookDateList);
         return paymentKey;
         //return null;
+    }
+
+    @Override
+    public List<String> getBookedDate(String roomSeq) {
+        List<String> bookedDateList = a01DataAccessor.getBookedDate(roomSeq);
+        List<String> bookedDateListAddDash = new ArrayList<>();
+        for (String bookedDate : bookedDateList) {
+            bookedDateListAddDash.add(bookedDate.substring(0, 4) + "-" + bookedDate.substring(4, 6) + "-" + bookedDate.substring(6, 8));
+        }
+        return bookedDateListAddDash;
+    }
+
+    @Override
+    public List<PaymentBo> getPaymentHistory() {
+
+        List<PaymentDo> paymentDoList = a01DataAccessor.getPaymentHistory();
+        List<PaymentBo> paymentBoList = new ArrayList<>();
+        for (PaymentDo paymentDo : paymentDoList) {
+            PaymentBo obj = new PaymentBo();
+            obj.setPaymentKey(paymentDo.getPaymentKey());
+            obj.setTotalAmount(paymentDo.getTotalAmount());
+            obj.setStatus(paymentDo.getStatus());
+
+            paymentBoList.add(obj);
+        }
+        return paymentBoList;
     }
 }

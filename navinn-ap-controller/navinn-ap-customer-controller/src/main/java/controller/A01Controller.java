@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import persistent.model.bo.PaymentBo;
 import persistent.model.bo.RoomBo;
 import service.A01Service;
 
@@ -55,6 +56,16 @@ public class A01Controller {
     @RequestMapping(value = "booking")
     public String getRoomInfoByRoomSeq(@RequestParam("roomSeq") String roomSeq, @RequestParam("bookingStartDate") String bookingStartDate, @RequestParam("bookingEndDate") String bookingEndDate) {
         return a01Service.booking(roomSeq, bookingStartDate, bookingEndDate);
+    }
+
+    @RequestMapping(value = "/getBookedDate")
+    public List<String> getBookedDate(@RequestParam("roomSeq") String roomSeq) {
+        return a01Service.getBookedDate(roomSeq);
+    }
+
+    @RequestMapping(value = "/getPaymentHistory")
+    public List<PaymentBo> getPaymentHistory() {
+        return a01Service.getPaymentHistory();
     }
 
 }
