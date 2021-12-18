@@ -2,9 +2,10 @@ package service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import persistent.dao.A01DataAccessor;
-import persistent.model.bean.PaymentDo;
+import persistent.model.bean.BookingInfoDo;
 import persistent.model.bean.PaymentPo;
 import persistent.model.bean.RoomPo;
+import persistent.model.bo.BookingInfoBo;
 import persistent.model.bo.OrderBo;
 import persistent.model.bean.OrderPo;
 import persistent.model.bo.PaymentBo;
@@ -16,7 +17,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class A01ServiceImpl implements A01Service {
     @Autowired
@@ -111,6 +111,7 @@ public class A01ServiceImpl implements A01Service {
         for (PaymentPo paymentPo : paymentDoList) {
             PaymentBo obj = new PaymentBo();
             obj.setPaymentKey(paymentPo.getPaymentKey());
+            obj.setReceiveWallet(paymentPo.getReceiveWallet());
             obj.setTotalAmount(paymentPo.getTotalAmount());
             obj.setStatus(paymentPo.getStatus());
 
@@ -118,4 +119,30 @@ public class A01ServiceImpl implements A01Service {
         }
         return paymentBoList;
     }
+
+    @Override
+    public BookingInfoBo getBookingInfoByPaymentKey(String paymentKey) {
+
+        BookingInfoDo bookingInfoDo = a01DataAccessor.getBookingInfoByPaymentKey(paymentKey);
+
+        BookingInfoBo obj = new BookingInfoBo();
+
+        obj.setPaymentSeq(bookingInfoDo.getPaymentSeq());
+        obj.setRoomName(bookingInfoDo.getRoomName());
+        obj.setRoomPrice(bookingInfoDo.getRoomPrice());
+        obj.setBookStartDate(bookingInfoDo.getBookStartDate());
+        obj.setBookEndDate(bookingInfoDo.getBookEndDate());
+        obj.setPaymentKey(bookingInfoDo.getPaymentKey());
+        obj.setReceiveWallet(bookingInfoDo.getReceiveWallet());
+        obj.setTotalAmount(bookingInfoDo.getTotalAmount());
+        obj.setStatus(bookingInfoDo.getStatus());
+
+        return obj;
+    }
+
+    @Override
+    public void updatePaymentStatusToPaid(String paymentKey) {
+        a01DataAccessor.updatePaymentStatusToPaid(paymentKey);
+    };
+
 }

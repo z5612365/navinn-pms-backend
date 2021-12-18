@@ -2,12 +2,13 @@ package persistent.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import persistent.dao.A01DataAccessor;
+import persistent.model.bean.BookingInfoDo;
 import persistent.model.bean.OrderPo;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import persistent.model.bean.PaymentDo;
 import persistent.model.bean.PaymentPo;
 import persistent.model.bean.RoomPo;
+import persistent.model.mapper.BookingInfoDoRowMapper;
 import persistent.model.mapper.RoomPoRowMapper;
 
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ import java.util.Random;
 
 public class A01DataAccessorImpl implements A01DataAccessor {
 
-    private final String navinn_wallet_addr = "";
+    private final String navinn_wallet_addr = "xNVVuFAbwr5jnTBTsisCseq4J2NXzvtqo7McvLAKfHYi7PHs7ybHSduVcp79mo69x4nTsb4sVcFiRQd45wzNZV8STSGUiyPzka9ucXJ2KdJfMgEerWgRaXAdPXPp97zPC6Pav1hySeq";
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -67,11 +68,13 @@ public class A01DataAccessorImpl implements A01DataAccessor {
         Random random = new Random();
         String paymentKey = String.format("%03d", random.nextInt(max + min) + min);//four Digit Value
 
+        String sql = "SELECT ROOM_PRICE FROM TB_ROOM WHERE ROOM_SEQ = ?;";
+        BigDecimal roomPrice = jdbcTemplate.queryForObject(sql, BigDecimal.class, new Object[]{roomSeq});
+        BigDecimal totalPrice = roomPrice.multiply(new BigDecimal(bookDateList.size()));
+
         //TODO GET ROMM PRICE BY PAYMENT_KEY
         //set navinn_wallet_addr
-        //FUNCTION: NEW PAGE SHOW PAYMENT_KEY,STATUS,BOOK_DATE
 
-        BigDecimal totalPrice = new BigDecimal(100);
         jdbcTemplate.update(
                 "INSERT INTO TB_PAYMENT ( PAYMENT_KEY, RECEIVE_WALLET, TOTAL_AMOUNT, STATUS ) VALUES ( ?, ?, ?, ? )",
                 paymentKey, navinn_wallet_addr, totalPrice, "UNPAID"
@@ -103,7 +106,7 @@ public class A01DataAccessorImpl implements A01DataAccessor {
 
     @Override
     public List<PaymentPo> getPaymentHistory() {
-        String sql = "SELECT TP.PAYMENT_KEY, TP.TOTAL_AMOUNT, TP.STATUS FROM TB_PAYMENT AS TP;";
+        String sql = "SELECT TP.PAYMENT_KEY, TP.RECEIVE_WALLET, TP.TOTAL_AMOUNT, TP.STATUS FROM TB_PAYMENT AS TP;";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         System.out.println("rows " + rows);
 
@@ -111,6 +114,7 @@ public class A01DataAccessorImpl implements A01DataAccessor {
         for (Map row : rows) {
             PaymentPo obj = new PaymentPo();
             obj.setPaymentKey(((String) row.get("PAYMENT_KEY")));
+            obj.setReceiveWallet(((String) row.get("RECEIVE_WALLET")));
             obj.setTotalAmount((BigDecimal) row.get("TOTAL_AMOUNT"));
             obj.setStatus(((String) row.get("STATUS")));
             roomPoList.add(obj);
@@ -118,4 +122,37 @@ public class A01DataAccessorImpl implements A01DataAccessor {
         return roomPoList;
     }
 
+    @Override
+    public BookingInfoDo getBookingInfoByPaymentKey(String paymentKey) {
+        String sql = "SELECT TP.PAYMENT_SEQ\n" +
+                "        , TR.ROOM_NAME\n" +
+                "        , TR.ROOM_PRICE\n" +
+                "        , MIN( STR_TO_DATE(TB.BOOK_DATE, '%Y%m%d') ) AS BOOK_START_DATE\n" +
+                "        , MAX( STR_TO_DATE(TB.BOOK_DATE, '%Y%m%d') ) AS BOOK_END_DATE\n" +
+                "        , TP.PAYMENT_KEY\n" +
+                "        , TP.RECEIVE_WALLET\n" +
+                "        , TP.TOTAL_AMOUNT\n" +
+                "        , TP.STATUS\n" +
+                "        FROM TB_PAYMENT AS TP\n" +
+                "        JOIN TB_BOOKING AS TB ON TP.PAYMENT_KEY = TB.PAYMENT_KEY\n" +
+                "        JOIN TB_ROOM AS TR ON TB.ROOM_SEQ = TR.ROOM_SEQ\n" +
+                "        WHERE TP.PAYMENT_KEY=?\n" +
+                "        GROUP BY TP.PAYMENT_SEQ;";
+        BookingInfoDo bookingInfoDo = (BookingInfoDo) jdbcTemplate.queryForObject(sql, new BookingInfoDoRowMapper(), new Object[]{paymentKey});
+        return bookingInfoDo;
+    }
+
+    @Override
+    public void updatePaymentStatusToPaid(String paymentKey) {
+
+        //BigDecimal totalPrice = new BigDecimal(100);
+        jdbcTemplate.update(
+                "UPDATE TB_PAYMENT SET STATUS=\"?\" WHERE PAYMENT_KEY=?;",
+                "PAID", paymentKey
+        );
+
+    }
+
 }
+
+

@@ -1,6 +1,7 @@
 package service;
 
-import persistent.model.bean.PaymentDo;
+import persistent.model.bean.BookingInfoDo;
+import persistent.model.bo.BookingInfoBo;
 import persistent.model.bo.OrderBo;
 import persistent.model.bo.PaymentBo;
 import persistent.model.bo.RoomBo;
@@ -20,4 +21,7 @@ public interface A01Service {
 
     public List<PaymentBo> getPaymentHistory();
 
+    public BookingInfoBo getBookingInfoByPaymentKey(String paymentKey);
+
+    public void updatePaymentStatusToPaid(String paymentKey);
 }
