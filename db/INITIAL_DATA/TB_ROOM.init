@@ -1,20 +1,20 @@
 INSERT INTO TB_ROOM ( ROOM_NAME, ROOM_URL, ROOM_ALT, ROOM_DESC, ROOM_SPEC, ROOM_PRICE )
-VALUES ( "Classic Room", "https://static.wixstatic.com/media/f8bcfe_88faba1487494738bb0739e849d82e55~mv2.jpg/v1/fill/w_900,h_900,q_90/f8bcfe_88faba1487494738bb0739e849d82e55~mv2.webp", "", "For bussiness man.", "", 100 );
+VALUES ( "Classic Room", "https://static.wixstatic.com/media/f8bcfe_88faba1487494738bb0739e849d82e55~mv2.jpg/v1/fill/w_900,h_900,q_90/f8bcfe_88faba1487494738bb0739e849d82e55~mv2.webp", "", "For bussiness man.", "", 1 );
 
 INSERT INTO TB_ROOM ( ROOM_NAME, ROOM_URL, ROOM_ALT, ROOM_DESC, ROOM_SPEC, ROOM_PRICE )
-VALUES ( "Fancy Room", "https://static.wixstatic.com/media/f8bcfe_ac185cf6a839467aaed0c8ac2ceb2741~mv2.jpg/v1/fill/w_900,h_900,q_90/f8bcfe_ac185cf6a839467aaed0c8ac2ceb2741~mv2.webp", "", "For play boy.", "", 200 );
+VALUES ( "Fancy Room", "https://static.wixstatic.com/media/f8bcfe_ac185cf6a839467aaed0c8ac2ceb2741~mv2.jpg/v1/fill/w_900,h_900,q_90/f8bcfe_ac185cf6a839467aaed0c8ac2ceb2741~mv2.webp", "", "For play boy.", "", 2 );
 
 INSERT INTO TB_ROOM ( ROOM_NAME, ROOM_URL, ROOM_ALT, ROOM_DESC, ROOM_SPEC, ROOM_PRICE )
-VALUES ( "Chill Room", "https://static.wixstatic.com/media/f8bcfe_3579df5e727c41528aadbe75da54c894~mv2.jpg/v1/fill/w_900,h_900,q_90/f8bcfe_3579df5e727c41528aadbe75da54c894~mv2.webp", "", "For easy-going person.", "", 300 );
+VALUES ( "Chill Room", "https://static.wixstatic.com/media/f8bcfe_3579df5e727c41528aadbe75da54c894~mv2.jpg/v1/fill/w_900,h_900,q_90/f8bcfe_3579df5e727c41528aadbe75da54c894~mv2.webp", "", "For easy-going person.", "", 3 );
 
 INSERT INTO TB_ROOM ( ROOM_NAME, ROOM_URL, ROOM_ALT, ROOM_DESC, ROOM_SPEC, ROOM_PRICE )
-VALUES ( "Gorgeous Room", "https://static.wixstatic.com/media/f8bcfe_17c9bf0e39df4a9b91937a2323d9b554~mv2.jpg/v1/fill/w_450,h_450,q_90/f8bcfe_17c9bf0e39df4a9b91937a2323d9b554~mv2.webp", "", "For gorgeous women.", "", 400 );
+VALUES ( "Gorgeous Room", "https://static.wixstatic.com/media/f8bcfe_17c9bf0e39df4a9b91937a2323d9b554~mv2.jpg/v1/fill/w_450,h_450,q_90/f8bcfe_17c9bf0e39df4a9b91937a2323d9b554~mv2.webp", "", "For gorgeous women.", "", 4 );
 
 INSERT INTO TB_ROOM ( ROOM_NAME, ROOM_URL, ROOM_ALT, ROOM_DESC, ROOM_SPEC, ROOM_PRICE )
-VALUES ( "Happy Room", "https://static.wixstatic.com/media/f8bcfe_74b221da6bc644aba81e1325bf13f8a6~mv2.jpg/v1/fill/w_450,h_450,q_90/f8bcfe_74b221da6bc644aba81e1325bf13f8a6~mv2.webp", "", "For happy family.", "", 500 );
+VALUES ( "Happy Room", "https://static.wixstatic.com/media/f8bcfe_74b221da6bc644aba81e1325bf13f8a6~mv2.jpg/v1/fill/w_450,h_450,q_90/f8bcfe_74b221da6bc644aba81e1325bf13f8a6~mv2.webp", "", "For happy family.", "", 5 );
 
 INSERT INTO TB_ROOM ( ROOM_NAME, ROOM_URL, ROOM_ALT, ROOM_DESC, ROOM_SPEC, ROOM_PRICE )
-VALUES ( "Special Room", "https://static.wixstatic.com/media/f8bcfe_f6081909e3c5412ca61263332cc92a2d~mv2.jpg/v1/fill/w_450,h_450,q_90/f8bcfe_f6081909e3c5412ca61263332cc92a2d~mv2.webp", "", "For someone special.", "", 600 );
+VALUES ( "Special Room", "https://static.wixstatic.com/media/f8bcfe_f6081909e3c5412ca61263332cc92a2d~mv2.jpg/v1/fill/w_450,h_450,q_90/f8bcfe_f6081909e3c5412ca61263332cc92a2d~mv2.webp", "", "For someone special.", "", 6 );
 
 INSERT INTO TB_ROOM ( ROOM_NAME, ROOM_URL, ROOM_ALT, ROOM_DESC, ROOM_SPEC, ROOM_PRICE )
-VALUES ( "Cool Room", "https://static.wixstatic.com/media/f8bcfe_ad34d1310c79479e9645972db0d9756e~mv2.jpg/v1/fill/w_450,h_450,q_90/f8bcfe_ad34d1310c79479e9645972db0d9756e~mv2.webp", "", "For cool guys.", "", 700 );
+VALUES ( "Cool Room", "https://static.wixstatic.com/media/f8bcfe_ad34d1310c79479e9645972db0d9756e~mv2.jpg/v1/fill/w_450,h_450,q_90/f8bcfe_ad34d1310c79479e9645972db0d9756e~mv2.webp", "", "For cool guys.", "", 7 );

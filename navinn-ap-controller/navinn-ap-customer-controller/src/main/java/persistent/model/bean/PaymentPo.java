@@ -4,11 +4,20 @@ import java.math.BigDecimal;
 
 public class PaymentPo {
 
+    private Integer paymentSeq;
     private String paymentKey;
     private String receiveWallet;
     private String refundWallet;
     private BigDecimal totalAmount;
     private String status;
+
+    public Integer getPaymentSeq() {
+        return paymentSeq;
+    }
+
+    public void setPaymentSeq(Integer paymentSeq) {
+        this.paymentSeq = paymentSeq;
+    }
 
     public String getPaymentKey() {
         return paymentKey;
